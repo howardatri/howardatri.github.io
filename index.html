@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[您的姓名] - 个人主页</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">您的名字</div>
+        <nav>
+            <a href="#about">关于我</a>
+            <a href="#skills">技能</a>
+            <a href="#projects">项目</a>
+            <a href="#contact">联系</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about" class="hero">
+            <div class="hero-content">
+                <img src="avatar.jpg" alt="您的头像" class="profile-photo">
+                <h1>你好，我是 [您的姓名] 👋</h1>
+                <h2>一名 [您的职业]，专注于 [您的技术方向]。</h2>
+                <p>我热衷于创造高性能、用户友好的数字体验。在这里，您可以探索我的工作和思考。</p>
+                <div class="social-links">
+                    <a href="[您的GitHub链接]" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="[您的LinkedIn链接]" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="mailto:您的邮箱" target="_blank"><i class="fas fa-envelope"></i> 邮件联系</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section-container">
+            <h2>核心技能</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <i class="fas fa-code"></i>
+                    <h3>前端开发</h3>
+                    <p>HTML5, CSS3 (Sass/Less), JavaScript (React/Vue/Angular)</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-server"></i>
+                    <h3>后端服务</h3>
+                    <p>Node.js (Express), Python (Django), Java (Spring Boot)</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-database"></i>
+                    <h3>数据库与云</h3>
+                    <p>MySQL, MongoDB, Docker, AWS/阿里云</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section-container">
+            <h2>精选项目</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <img src="project1.jpg" alt="项目一截图">
+                    <h3>项目名称一</h3>
+                    <p>一个关于 [项目类型] 的 Web 应用程序，主要使用 [技术栈]。</p>
+                    <a href="[项目链接]" target="_blank" class="btn-small">查看详情</a>
+                </div>
+                <div class="project-card">
+                    <img src="project2.jpg" alt="项目二截图">
+                    <h3>项目名称二</h3>
+                    <p>一个优化 [领域] 流程的工具，实现了 [关键功能]。</p>
+                    <a href="[项目链接]" target="_blank" class="btn-small">查看详情</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section-container">
+            <h2>保持联系</h2>
+            <p>如果您有合作意向或任何问题，欢迎随时联系我！</p>
+            <a href="mailto:您的邮箱" class="btn-primary">发送邮件给我</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 [您的姓名]. 版权所有.</p>
+    </footer>
+    
+</body>
+</html>
