@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JSON 工具 · howardatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="../index.html">howardatri</a>
+    <nav class="nav-links">
+      <a href="timer.html">计时器</a>
+      <a href="stopwatch.html">秒表</a>
+      <a href="countdown.html">日期倒计时</a>
+      <a href="json.html">JSON</a>
+      <a href="../about.html">关于</a>
+    </nav>
+    <button class="pill" id="themeToggle" aria-label="切换主题">🌙</button>
+  </div>
+</header>
+
+<main class="container tool-wrap">
+  <div class="tool-header">
+    <div class="tool-title">JSON 格式化与校验</div>
+    <div class="tool-controls row">
+      <button class="btn" id="format">美化</button>
+      <button class="btn ghost" id="minify">压缩</button>
+      <button class="pill" id="copy">复制结果</button>
+      <button class="pill" id="clear">清空</button>
+    </div>
+  </div>
+
+  <div class="split">
+    <textarea class="tool-area" id="jsonIn" placeholder="在此粘贴或输入 JSON"></textarea>
+    <textarea class="tool-area" id="jsonOut" placeholder="输出结果" readonly></textarea>
+  </div>
+  <div class="small" id="err" style="margin-top:8px"></div>
+</main>
+
+<footer class="footer container">
+  <div class="footer-inner">
+    <div>© 2025 howardatri</div>
+    <div class="muted">工具 · JSON</div>
+  </div>
+</footer>
+
+<script>
+var t=localStorage.getItem('theme');
+if(t){document.documentElement.setAttribute('data-theme',t)}
+var b=document.getElementById('themeToggle');
+function u(){var c=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',c);localStorage.setItem('theme',c);b.textContent=c==='dark'?'🌙':'☀️'}
+u();
+b.addEventListener('click',u);
+
+var jsonIn=document.getElementById('jsonIn');
+var jsonOut=document.getElementById('jsonOut');
+var err=document.getElementById('err');
+var format=document.getElementById('format');
+var minify=document.getElementById('minify');
+var copy=document.getElementById('copy');
+var clear=document.getElementById('clear');
+
+function load(){jsonIn.value=localStorage.getItem('json.last')||''}
+function save(){localStorage.setItem('json.last',jsonIn.value)}
+function beautify(){err.textContent='';try{var o=JSON.parse(jsonIn.value);jsonOut.value=JSON.stringify(o,null,2);save()}catch(e){err.textContent='解析错误：'+String(e.message||e)}}
+function compress(){err.textContent='';try{var o=JSON.parse(jsonIn.value);jsonOut.value=JSON.stringify(o);save()}catch(e){err.textContent='解析错误：'+String(e.message||e)}}
+function copyFn(){if(!jsonOut.value)return;navigator.clipboard.writeText(jsonOut.value).then(function(){copy.textContent='已复制';setTimeout(function(){copy.textContent='复制结果'},1200)})}
+function clearFn(){jsonIn.value='';jsonOut.value='';err.textContent='';save()}
+
+jsonIn.addEventListener('input',save);
+format.addEventListener('click',beautify);
+minify.addEventListener('click',compress);
+copy.addEventListener('click',copyFn);
+clear.addEventListener('click',clearFn);
+load();
+</script>
+</body>
+</html>
+

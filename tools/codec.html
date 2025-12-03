@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>编解码 · howardatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="../index.html">howardatri</a>
+    <nav class="nav-links">
+      <a href="timer.html">计时器</a>
+      <a href="stopwatch.html">秒表</a>
+      <a href="countdown.html">日期倒计时</a>
+      <a href="codec.html">编解码</a>
+      <a href="../about.html">关于</a>
+    </nav>
+    <button class="pill" id="themeToggle" aria-label="切换主题">🌙</button>
+  </div>
+</header>
+
+<main class="container tool-wrap">
+  <div class="tool-header">
+    <div class="tool-title">Base64 / URL 编解码</div>
+    <div class="tool-controls row">
+      <select class="tool-input" id="mode">
+        <option value="base64">Base64</option>
+        <option value="url">URL 编码</option>
+      </select>
+      <select class="tool-input" id="dir">
+        <option value="encode">编码</option>
+        <option value="decode">解码</option>
+      </select>
+      <button class="btn" id="run">执行</button>
+      <button class="btn ghost" id="copy">复制结果</button>
+      <button class="pill" id="clear">清空</button>
+    </div>
+  </div>
+
+  <div class="split">
+    <textarea class="tool-area" id="src" placeholder="输入文本"></textarea>
+    <textarea class="tool-area" id="dst" placeholder="输出结果" readonly></textarea>
+  </div>
+  <div class="small" id="err" style="margin-top:8px"></div>
+</main>
+
+<footer class="footer container">
+  <div class="footer-inner">
+    <div>© 2025 howardatri</div>
+    <div class="muted">工具 · 编解码</div>
+  </div>
+</footer>
+
+<script>
+var t=localStorage.getItem('theme');
+if(t){document.documentElement.setAttribute('data-theme',t)}
+var b=document.getElementById('themeToggle');
+function u(){var c=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',c);localStorage.setItem('theme',c);b.textContent=c==='dark'?'🌙':'☀️'}
+u();
+b.addEventListener('click',u);
+
+var mode=document.getElementById('mode');
+var dir=document.getElementById('dir');
+var run=document.getElementById('run');
+var copy=document.getElementById('copy');
+var clear=document.getElementById('clear');
+var src=document.getElementById('src');
+var dst=document.getElementById('dst');
+var err=document.getElementById('err');
+
+function load(){mode.value=localStorage.getItem('codec.mode')||'base64';dir.value=localStorage.getItem('codec.dir')||'encode';src.value=localStorage.getItem('codec.src')||''}
+function save(){localStorage.setItem('codec.mode',mode.value);localStorage.setItem('codec.dir',dir.value);localStorage.setItem('codec.src',src.value)}
+
+function exec(){err.textContent='';var m=mode.value;var d=dir.value;var text=src.value;try{var out='';if(m==='base64'){if(d==='encode'){out=btoa(unescape(encodeURIComponent(text)))}else{out=decodeURIComponent(escape(atob(text)))}}else{if(d==='encode'){out=encodeURIComponent(text)}else{out=decodeURIComponent(text)}}dst.value=out;save()}catch(e){err.textContent='错误：'+String(e.message||e)}}
+function copyFn(){if(!dst.value)return;navigator.clipboard.writeText(dst.value).then(function(){copy.textContent='已复制';setTimeout(function(){copy.textContent='复制结果'},1200)})}
+function clearFn(){src.value='';dst.value='';err.textContent='';save()}
+
+mode.addEventListener('change',exec);dir.addEventListener('change',exec);src.addEventListener('input',save);
+run.addEventListener('click',exec);copy.addEventListener('click',copyFn);clear.addEventListener('click',clearFn);
+load();
+</script>
+</body>
+</html>
+
