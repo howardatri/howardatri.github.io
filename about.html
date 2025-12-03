@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>关于 · howardatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html">howardatri</a>
+    <nav class="nav-links">
+      <a href="tools/timer.html">计时器</a>
+      <a href="tools/stopwatch.html">秒表</a>
+      <a href="tools/countdown.html">日期倒计时</a>
+      <a href="about.html">关于</a>
+    </nav>
+    <button class="pill" id="themeToggle" aria-label="切换主题">🌙</button>
+  </div>
+</header>
+
+<main class="container tool-wrap">
+  <div class="tool-title">关于</div>
+  <div class="grid" style="margin-top:16px">
+    <div class="card">
+      <div class="card-title">howardatri</div>
+      <div class="card-desc">邮箱 <a href="mailto:Howard22022@outlook.com">Howard22022@outlook.com</a></div>
+    </div>
+    <div class="card">
+      <div class="card-title">说明</div>
+      <div class="card-desc">这是基于 GitHub Pages 的个人网站与工具集合，包含计时器、秒表与日期倒计时。</div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer container">
+  <div class="footer-inner">
+    <div>© 2025 howardatri</div>
+    <div class="muted">页面 · 关于</div>
+  </div>
+</footer>
+
+<script>
+var t=localStorage.getItem('theme');
+if(t){document.documentElement.setAttribute('data-theme',t)}
+var b=document.getElementById('themeToggle');
+function u(){var c=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',c);localStorage.setItem('theme',c);b.textContent=c==='dark'?'🌙':'☀️'}
+u();
+b.addEventListener('click',u);
+</script>
+</body>
+</html>

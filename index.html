@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>howardatri · 首页</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html">howardatri</a>
+    <nav class="nav-links">
+      <a href="tools/timer.html">计时器</a>
+      <a href="tools/stopwatch.html">秒表</a>
+      <a href="tools/countdown.html">日期倒计时</a>
+      <a href="about.html">关于</a>
+    </nav>
+    <button class="pill" id="themeToggle" aria-label="切换主题">🌙</button>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1 class="title">
+      <span class="accent">Howard Atri</span>
+    </h1>
+    <p class="subtitle">个人网站与实用小工具集合</p>
+    <div class="actions">
+      <a class="btn" href="tools/timer.html">开始使用计时器</a>
+      <a class="btn ghost" href="about.html">联系我</a>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">工具</h2>
+    <div class="grid">
+      <a class="card" href="tools/timer.html">
+        <div class="card-title">计时器</div>
+        <div class="card-desc">设置时长并倒计时，结束提醒。</div>
+      </a>
+      <a class="card" href="tools/stopwatch.html">
+        <div class="card-title">秒表</div>
+        <div class="card-desc">开始、暂停、重置与圈次记录。</div>
+      </a>
+      <a class="card" href="tools/countdown.html">
+        <div class="card-title">日期倒计时</div>
+        <div class="card-desc">选择目标日期时间，实时剩余显示。</div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">页面</h2>
+    <div class="grid">
+      <a class="card" href="about.html">
+        <div class="card-title">关于</div>
+        <div class="card-desc">邮箱 Howard22022@outlook.com</div>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer container">
+  <div class="footer-inner">
+    <div>© 2025 howardatri</div>
+    <div class="muted">基于 GitHub Pages</div>
+  </div>
+</footer>
+
+<script>
+var t=localStorage.getItem('theme');
+if(t){document.documentElement.setAttribute('data-theme',t)}
+var b=document.getElementById('themeToggle');
+function u(){var c=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',c);localStorage.setItem('theme',c);b.textContent=c==='dark'?'🌙':'☀️'}
+u();
+b.addEventListener('click',u);
+</script>
+</body>
+</html>

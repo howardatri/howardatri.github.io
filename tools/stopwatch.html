@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>秒表 · howardatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="../index.html">howardatri</a>
+    <nav class="nav-links">
+      <a href="timer.html">计时器</a>
+      <a href="stopwatch.html">秒表</a>
+      <a href="countdown.html">日期倒计时</a>
+      <a href="../about.html">关于</a>
+    </nav>
+    <button class="pill" id="themeToggle" aria-label="切换主题">🌙</button>
+  </div>
+</header>
+
+<main class="container tool-wrap">
+  <div class="tool-header">
+    <div class="tool-title">秒表</div>
+    <div class="tool-controls">
+      <button class="btn" id="start">开始</button>
+      <button class="btn ghost" id="lap">圈次</button>
+      <button class="pill" id="pause">暂停</button>
+      <button class="pill" id="reset">重置</button>
+    </div>
+  </div>
+  <div class="stopwatch-display" id="display">00:00.000</div>
+  <div class="laps" id="laps"></div>
+</main>
+
+<footer class="footer container">
+  <div class="footer-inner">
+    <div>© 2025 howardatri</div>
+    <div class="muted">工具 · 秒表</div>
+  </div>
+</footer>
+
+<script>
+var t=localStorage.getItem('theme');
+if(t){document.documentElement.setAttribute('data-theme',t)}
+var b=document.getElementById('themeToggle');
+function u(){var c=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',c);localStorage.setItem('theme',c);b.textContent=c==='dark'?'🌙':'☀️'}
+u();
+b.addEventListener('click',u);
+
+var start=document.getElementById('start');
+var lap=document.getElementById('lap');
+var pause=document.getElementById('pause');
+var reset=document.getElementById('reset');
+var disp=document.getElementById('display');
+var laps=document.getElementById('laps');
+var base=0;var elapsed=0;var running=false;var rAF=null;var lastLap=0;var lapCount=0;
+function fmt(ms){var m=Math.floor(ms/60000);var s=Math.floor((ms%60000)/1000);var msr=Math.floor(ms%1000);return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')+'.'+String(msr).padStart(3,'0')}
+function frame(ts){if(!running)return;elapsed=ts-base;disp.textContent=fmt(elapsed);rAF=requestAnimationFrame(frame)}
+function startFn(){if(running)return;running=true;base=performance.now()-elapsed;rAF=requestAnimationFrame(frame)}
+function pauseFn(){if(!running)return;running=false;cancelAnimationFrame(rAF)}
+function resetFn(){running=false;cancelAnimationFrame(rAF);elapsed=0;lastLap=0;lapCount=0;disp.textContent=fmt(0);laps.innerHTML=''}
+function lapFn(){if(!running)return;lapCount++;var cur=elapsed;var diff=cur-lastLap;lastLap=cur;var row=document.createElement('div');row.className='lap';var a=document.createElement('div');a.textContent='圈次 '+lapCount;var b=document.createElement('div');b.textContent=fmt(diff);row.appendChild(a);row.appendChild(b);laps.prepend(row)}
+start.addEventListener('click',startFn);pause.addEventListener('click',pauseFn);reset.addEventListener('click',resetFn);lap.addEventListener('click',lapFn);
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日期倒计时 · howardatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="../index.html">howardatri</a>
+    <nav class="nav-links">
+      <a href="timer.html">计时器</a>
+      <a href="stopwatch.html">秒表</a>
+      <a href="countdown.html">日期倒计时</a>
+      <a href="../about.html">关于</a>
+    </nav>
+    <button class="pill" id="themeToggle" aria-label="切换主题">🌙</button>
+  </div>
+</header>
+
+<main class="container tool-wrap">
+  <div class="tool-header">
+    <div class="tool-title">日期倒计时</div>
+    <div class="tool-controls">
+      <input class="tool-input" id="dt" type="datetime-local">
+      <button class="btn" id="start">开始</button>
+      <button class="pill" id="reset">重置</button>
+    </div>
+  </div>
+  <div class="countdown-grid">
+    <div class="count-box"><div class="count-num" id="d">0</div><div class="count-label">天</div></div>
+    <div class="count-box"><div class="count-num" id="h">0</div><div class="count-label">小时</div></div>
+    <div class="count-box"><div class="count-num" id="m">0</div><div class="count-label">分钟</div></div>
+    <div class="count-box"><div class="count-num" id="s">0</div><div class="count-label">秒</div></div>
+  </div>
+</main>
+
+<footer class="footer container">
+  <div class="footer-inner">
+    <div>© 2025 howardatri</div>
+    <div class="muted">工具 · 日期倒计时</div>
+  </div>
+</footer>
+
+<script>
+var t=localStorage.getItem('theme');
+if(t){document.documentElement.setAttribute('data-theme',t)}
+var b=document.getElementById('themeToggle');
+function u(){var c=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',c);localStorage.setItem('theme',c);b.textContent=c==='dark'?'🌙':'☀️'}
+u();
+b.addEventListener('click',u);
+
+var dt=document.getElementById('dt');
+var start=document.getElementById('start');
+var reset=document.getElementById('reset');
+var d=document.getElementById('d');
+var h=document.getElementById('h');
+var m=document.getElementById('m');
+var s=document.getElementById('s');
+var iv=null;var target=null;
+function update(){if(!target){d.textContent='0';h.textContent='0';m.textContent='0';s.textContent='0';return}var now=Date.now();var diff=target-now;if(diff<=0){clearInterval(iv);iv=null;d.textContent='0';h.textContent='0';m.textContent='0';s.textContent='0';return}var ds=Math.floor(diff/1000);var dd=Math.floor(ds/86400);var hh=Math.floor((ds%86400)/3600);var mm=Math.floor((ds%3600)/60);var ss=Math.floor(ds%60);d.textContent=String(dd);h.textContent=String(hh);m.textContent=String(mm);s.textContent=String(ss)}
+function begin(){if(!dt.value)return;target=new Date(dt.value).getTime();clearInterval(iv);iv=setInterval(update,500);update()}
+function resetFn(){clearInterval(iv);iv=null;target=null;dt.value='';update()}
+start.addEventListener('click',begin);reset.addEventListener('click',resetFn);update();
+</script>
+</body>
+</html>
