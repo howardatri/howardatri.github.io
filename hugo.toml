@@ -1,0 +1,81 @@
+baseURL = 'https://howardatri.github.io/'
+locale = 'zh-cn'
+defaultContentLanguage = 'zh-cn'
+title = 'howardatri'
+theme = 'PaperMod'
+paginate = 10
+
+[params]
+  env = 'production'
+  defaultTheme = 'dark'
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowToc = true
+  TocOpen = false
+  author = 'Howard Atri'
+  description = '个人网站与实用工具集合'
+  
+  [[params.socialIcons]]
+    name = 'github'
+    url = 'https://github.com/howardatri'
+    
+  [[params.socialIcons]]
+    name = 'email'
+    url = 'mailto:Howard22022@outlook.com'
+
+  [params.homeInfoParams]
+    Title = '👋 你好，我是 Howard Atri'
+    Content = '欢迎来到我的个人网站，这里记录了我的博客文章和实用工具。'
+
+[params.cover]
+  hiddenInList = false
+  hiddenInSingle = false
+
+[params.editPost]
+  URL = ''
+  Text = ''
+  appendFilePath = false
+
+[params.assets]
+  disableHLJS = false
+
+[params.favicon]
+  favicon48x48 = '/favicon.ico'
+
+[taxonomies]
+  tag = 'tags'
+  category = 'categories'
+
+[outputs]
+  home = ['HTML', 'RSS', 'JSON']
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = false
+    style = 'monokai'
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[menu]
+  [[menu.main]]
+    name = '首页'
+    url = '/'
+    weight = 1
+  [[menu.main]]
+    name = '工具'
+    url = '/tools'
+    weight = 2
+  [[menu.main]]
+    name = '关于'
+    url = '/about'
+    weight = 3
+  [[menu.main]]
+    name = '标签'
+    url = '/tags'
+    weight = 4
