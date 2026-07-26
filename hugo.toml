@@ -17,6 +17,7 @@ paginate = 10
   TocOpen = false
   author = 'Howard Atri'
   description = '个人网站与实用工具集合'
+  comments = true
   
   [[params.socialIcons]]
     name = 'github'
@@ -68,14 +69,18 @@ paginate = 10
     url = '/'
     weight = 1
   [[menu.main]]
+    name = '归档'
+    url = '/archives/'
+    weight = 2
+  [[menu.main]]
     name = '工具'
     url = '/tools'
-    weight = 2
+    weight = 3
   [[menu.main]]
     name = '关于'
     url = '/about'
-    weight = 3
+    weight = 4
   [[menu.main]]
     name = '标签'
     url = '/tags'
-    weight = 4
+    weight = 5
