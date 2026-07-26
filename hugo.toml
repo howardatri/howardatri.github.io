@@ -18,6 +18,7 @@ paginate = 10
   author = 'Howard Atri'
   description = '个人网站与实用工具集合'
   comments = true
+  vercount = true
   
   [[params.socialIcons]]
     name = 'github'
