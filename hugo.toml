@@ -89,3 +89,7 @@ paginate = 10
     name = '搜索'
     url = '/search/'
     weight = 6
+  [[menu.main]]
+    name = '友链'
+    url = '/friends/'
+    weight = 7
