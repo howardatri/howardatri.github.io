@@ -14,6 +14,25 @@ hugo server -D
 
 ## 写新文章
 
+### 0. 批量创建文章（推荐）
+
+项目根目录提供了 `new-posts.ps1` 脚本，可一次创建多篇：
+
+```powershell
+# 批量创建多篇（英文标题）
+.\new-posts.ps1 -Titles "Post-One","Post-Two","Post-Three" -Tags "tech,hugo" -Category "tech"
+
+# 创建草稿（draft=true，编辑完再发布）
+.\new-posts.ps1 -Titles "Draft-Post" -Draft
+
+# 从文本文件读取标题（每行一个）
+.\new-posts.ps1 -List .\titles.txt
+```
+
+创建后编辑 `content/posts/` 下对应的 `.md` 文件，填入内容即可。
+
+> **注意**：PowerShell 中变量名不区分大小写，脚本内 `$draft` 类变量与 `$Draft` 参数会冲突，已用 `$draftState` 规避。自定义脚本时避开同名变量。
+
 ### 1. 创建文章
 
 ```bash
