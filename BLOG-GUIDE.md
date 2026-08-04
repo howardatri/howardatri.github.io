@@ -121,11 +121,27 @@ hugo new content custom-page.md
 
 ### 图片使用
 
-1. 将图片放入 `static/images/` 目录
-2. 在文章中引用：
+> **⚠️ 两个最容易踩的坑**（图片不显示的 90% 原因，务必遵守）：
+>
+> 1. **文件名不能有空格**：从微信/截图工具粘贴下来的图片名常带空格（如 `Pasted image xxx.png`），浏览器会自动转义导致 404。**务必改名为下划线**（如 `Pasted_image_xxx.png`）。
+> 2. **必须用绝对路径 `/images/` 开头**：写成 `![图](/images/xxx.png)`。不要写相对路径（如 `![图](xxx.png)`），否则 Hugo 会把它拼到文章 URL 下而找不到。
+
+操作步骤：
+
+1. 将图片放入 `static/images/` 目录，**重命名为无空格的下划线格式**（如 `Pasted_image_20251114192225.png`）
+2. 在文章中引用，**路径必须以 `/images/` 开头**：
 
 ```markdown
-![图片描述](/images/图片名.png)
+![图片描述](/images/Pasted_image_20251114192225.png)
+```
+
+> **注意**：引用里的文件名要和 `static/images/` 里的**实际文件名完全一致**（含大小写、下划线）。改 md 里的引用而不改实际文件名，照样会加载失败。
+
+**快速自查**：
+
+```powershell
+# 检查 static/images 下是否有带空格的文件名（应无输出）
+Get-ChildItem static/images | Where-Object { $_.Name -match ' ' }
 ```
 
 ### 代码块
@@ -210,7 +226,12 @@ git push origin main
 
 ### Q: 图片不显示？
 
-确认图片放在 `static/images/` 目录，路径以 `/images/` 开头
+按顺序排查：
+
+1. **文件名是否含空格**：图片放 `static/images/` 后，改名去掉空格（用下划线）
+2. **引用是否用绝对路径**：必须写 `/images/文件名.png`，不能只写 `文件名.png`
+3. **文件名是否完全一致**：md 里的引用和实际文件必须完全匹配（含大小写、下划线）
+4. 用 `hugo server -D` 本地预览验证，F12 查看 Network 里图片请求是否 404
 
 ### Q: 本地预览正常，线上不正常？
 

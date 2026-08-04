@@ -114,7 +114,7 @@ description = ''
 - **举例 (BEIR, 4B):** Direct-Point (45.4) 远超 Reason-Point (40.1) 。
     
 - 本文提出的 Direct 模型性能也优于所有现有的（基于 CoT 的）SOTA 基线 。
-    ![main result](Pasted_image_20251114192225.png)
+    ![main result](/images/Pasted_image_20251114192225.png)
 
 #### 3.3 消融实验 (Failure Mode Analysis)
 
@@ -127,13 +127,13 @@ description = ''
         
     2. **正类偏见:** (见 Table 3) CoT 模型更倾向于预测“True (相关)” 。这导致 TPR (真正率) 上升，但 **TNR (真负率) 暴跌** 。在负样本为主的 Reranker 任务中，这会导致大量**“假正例”(False Positives)** 被排到前面，严重损害 NDCG 。
 		    评估池:100pos 200neg 
-![figure 2](Pasted_image_20251114192655.png)
-![table 3](Pasted_image_20251114193121.png)
+![figure 2](/images/Pasted_image_20251114192655.png)
+![table 3](/images/Pasted_image_20251114193121.png)
 - **Listwise 失败原因：损害泛化性 (Hurts Generalization)** 。
 		推理虽然可以增强领域内训练的拟合度，但也会增加预测方差，并损害领域外泛化能力，即使通过 GRPO 缩短推理过程也是如此。
     
     1. **过拟合:** (见 Figure 3) 在**训练集**上，CoT 模型的 NDCG@10 反而**更高** (e.g., 87.55 vs 86.93) 。但离散度更大
-    ![figure 3](Pasted_image_20251114193431.png)
+    ![figure 3](/images/Pasted_image_20251114193431.png)
     2. **泛化失败:** 这种在训练集上的优势**无法泛化**到（OOD的）BRIGHT/BEIR 甚至（In-Domain的）MS MARCO 测试集 。
 	    Taable4上面
         
